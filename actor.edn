@@ -1,8 +1,1 @@
-{:did        "did:web:etzhayyim.github.io:com-etzhayyim-kamado"
- :handle     "kamado.etzhayyim.com"
- :ipns-key   "kamado-actor"
- :graph-type "com.etzhayyim.kamado.graph"
- :published  "2026-06-28"
- :bundle [["data" "data"]
-          [".well-known/did.json" "did.json"]
-          ["README.md" "README.md"]]}
+[{:db/id -1, :publish/did "did:web:etzhayyim.github.io:com-etzhayyim-kamado", :publish/handle "kamado.etzhayyim.com", :publish/ipns-key "kamado-actor", :publish/graph-type "com.etzhayyim.kamado.graph", :publish/published "2026-06-28", :publish/bundle "[[\"data\" \"data\"] [\".well-known/did.json\" \"did.json\"] [\"README.md\" \"README.md\"]]"}]
