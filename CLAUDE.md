@@ -24,7 +24,7 @@ Three faces over the kotoba Datom log:
 
 ISIC C1920 · ISCO 3134/8131/9311 · UNSPSC 15/71.
 
-## The honest thesis (empirically demonstrated — `methods/carbon_balance.py`)
+## The honest thesis (empirically demonstrated — `src/kamado/methods/carbon_balance.cljc`)
 
 A fossil→combusted pathway is **+3.50 tCO₂e/t**. Full robotic advanced-process-control on the
 *same* fossil pathway only reaches **+3.38** — a ~3% cut, all from the ~11% process slice;
@@ -37,9 +37,9 @@ control can fix it.
 
 1. **schema** `00-contracts/schemas/refining-ontology.kotoba.edn` — `:feedstock/class :db/allowed`
    excludes `:fossil-virgin-crude`.
-2. **lexicon** `lex/feedstockProvenance.edn` / `lex/synthesisRun.edn` — `feedstockClass` enum has
+2. **lexicon** `data/lex/feedstockProvenance.edn` / `data/lex/synthesisRun.edn` — `feedstockClass` enum has
    no `fossil-virgin-crude` member; `closedLoop`/`screened` `const true`.
-3. **code** `methods/feedstock_guard.py` + `cells/feedstock_guard/state_machine.py` — `ValueError`
+3. **code** `src/kamado/methods/feedstock_guard.cljc` + `src/kamado/cells/feedstock_guard/state_machine.cljc` — exception
    on any fossil feedstock (and `screen_intervention` raises on `:expand`/`:restart-fossil`, G3).
 
 ## Cells (langgraph→WASM; Murakumo-only; `.solve()` raises at R0)
@@ -59,21 +59,16 @@ G11 safety-honesty (not a certified safety system) · G12 no-persistence-launder
 
 ## Build / test
 
-```
-cd methods && python3 carbon_balance.py && python3 analyze.py
-cd methods && python3 ingest.py    # legacy oil-refining graph export → kotoba EAVT + kg.ingest_batch
-cd methods && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest test_kamado.py test_ingest.py  # 11+6
-cd cells   && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest test_state_machines.py          # 8
+```sh
+bb test
+bb audit
 ```
 
-**Legacy migration** (supersedes `oil-refining`): `methods/ingest.py` converts a legacy
+**Legacy migration** (supersedes `oil-refining`): `src/kamado/methods/ingest.cljc` converts a legacy
 RisingWave/Cypher node export (Refinery/RefineryUnit/RefineryOutage) → kotoba EAVT datoms +
 a `kg.ingest_batch` body (dedup vs seed; G4 no-person/org-operator; G1 `:observed-fossil`;
 G7 `:representative`). Live legacy read + KV/kotoba promotion are operator-gated (G8) — see
-`20-actors/oil-refining/MIGRATION-NOTES.md`.
-
-(Repo pytest plugin env is broken — `pydantic`/`langsmith`; the `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`
-prefix runs the suites in isolation.)
+the superseded actor's migration notes.
 
 ## Do not
 

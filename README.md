@@ -11,7 +11,7 @@ construction.
 
 ## Why a robotics-controlled fossil refinery is still a multi-generational harm
 
-`methods/carbon_balance.py` is the whole argument as arithmetic (tCO₂e per tonne of product):
+`src/kamado/methods/carbon_balance.cljc` is the whole argument as arithmetic (tCO₂e per tonne of product):
 
 | pathway | origin | process | fate | **NET** | D3? |
 |---|---:|---:|---:|---:|:---:|
@@ -29,7 +29,7 @@ rows are reached only by changing the **feedstock**. That is the entire design: 
 
 ## Three faces
 
-- **A. observation** (`asset_observation` + `methods/analyze.py`) — kotoba-native successor to the
+- **A. observation** (`asset_observation` + `src/kamado/methods/analyze.cljc`) — kotoba-native successor to the
   legacy `oil-refining` Cypher actor. Refinery/unit/outage registry + transition-readiness. A
   resilience + transition map, **never** a target-list (G4).
 - **B. decommission/transition** (`decommission_plan`) — §2(d) robotics to wind down / remediate /
@@ -39,13 +39,15 @@ rows are reached only by changing the **feedstock**. That is the entire design: 
 
 ## Run
 
+```sh
+bb test
+bb audit
 ```
-cd methods
-python3 carbon_balance.py          # the harm ledger
-python3 analyze.py                 # observation + transition + D3 report → out/intel-report.md
-PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest test_kamado.py          # 11
-cd ../cells && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest test_state_machines.py  # 8
-```
+
+Canonical EDN lives under `data/` and `manifest.edn`; semantic lexicons are
+`data/lex/*.edn`, with derived Datomic projections in `data/lex-datoms`. JSON/JSON-LD
+fixtures and contracts are isolated under `wire/`. Python, Go/TinyGo, and superseded
+shell/publish wrappers are forbidden by audit.
 
 ## Honest R0
 
