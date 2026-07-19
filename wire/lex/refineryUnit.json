@@ -1,52 +1,32 @@
 {
-  "lexicon": 1,
-  "id": "com.etzhayyim.kamado.refineryUnit",
-  "defs": {
-    "main": {
-      "type": "record",
-      "key": "tid",
-      "record": {
-        "type": "object",
-        "required": [
-          "unitId",
-          "refineryId",
-          "kind"
-        ],
-        "properties": {
-          "unitId": {
-            "type": "string"
+  "lexicon" : 1,
+  "id" : "com.etzhayyim.kamado.refineryUnit",
+  "defs" : {
+    "main" : {
+      "type" : "record",
+      "key" : "tid",
+      "record" : {
+        "type" : "object",
+        "required" : [ "unitId", "refineryId", "kind" ],
+        "properties" : {
+          "unitId" : {
+            "type" : "string"
           },
-          "refineryId": {
-            "type": "string",
-            "description": "→ refineryAsset.refineryId"
+          "refineryId" : {
+            "type" : "string",
+            "description" : "→ refineryAsset.refineryId"
           },
-          "kind": {
-            "type": "string",
-            "enum": [
-              "cdu",
-              "fcc",
-              "hydrocracker",
-              "coker",
-              "reformer",
-              "hydrotreater",
-              "alkylation"
-            ]
+          "kind" : {
+            "type" : "string",
+            "enum" : [ "cdu", "fcc", "hydrocracker", "coker", "reformer", "hydrotreater", "alkylation" ]
           },
-          "status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "idled",
-              "down"
-            ]
+          "status" : {
+            "type" : "string",
+            "enum" : [ "active", "idled", "down" ]
           },
-          "sourcing": {
-            "type": "string",
-            "enum": [
-              "representative",
-              "synthesized",
-              "verified"
-            ]
+          "sourcing" : {
+            "type" : "string",
+            "enum" : [ "representative", "synthesized", "verified" ]
           }
         }
       }
