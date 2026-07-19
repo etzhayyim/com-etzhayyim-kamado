@@ -1,65 +1,47 @@
 {
-  "lexicon": 1,
-  "id": "com.etzhayyim.kamado.refineryAsset",
-  "defs": {
-    "main": {
-      "type": "record",
-      "key": "tid",
-      "record": {
-        "type": "object",
-        "required": [
-          "refineryId",
-          "country",
-          "status",
-          "isObservation"
-        ],
-        "properties": {
-          "refineryId": {
-            "type": "string"
+  "lexicon" : 1,
+  "id" : "com.etzhayyim.kamado.refineryAsset",
+  "defs" : {
+    "main" : {
+      "type" : "record",
+      "key" : "tid",
+      "record" : {
+        "type" : "object",
+        "required" : [ "refineryId", "country", "status", "isObservation" ],
+        "properties" : {
+          "sourcing" : {
+            "type" : "string",
+            "enum" : [ "representative", "synthesized", "verified" ]
           },
-          "name": {
-            "type": "string"
+          "country" : {
+            "type" : "string"
           },
-          "country": {
-            "type": "string"
+          "refineryId" : {
+            "type" : "string"
           },
-          "operator": {
-            "type": "string",
-            "description": "org.corp.* id (kabuto) — an org, NEVER a person (G4)"
+          "transitionReadiness" : {
+            "type" : "string",
+            "enum" : [ "high", "medium", "low" ]
           },
-          "throughputBpd": {
-            "type": "integer",
-            "description": ":representative public-bulletin figure"
+          "operator" : {
+            "type" : "string",
+            "description" : "org.corp.* id (kabuto) — an org, NEVER a person (G4)"
           },
-          "status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "idled",
-              "decommissioning",
-              "converted"
-            ]
+          "isObservation" : {
+            "type" : "boolean",
+            "const" : true,
+            "description" : "G4 — kamado OBSERVES public assets; observation ≠ operation; not a target-list"
           },
-          "transitionReadiness": {
-            "type": "string",
-            "enum": [
-              "high",
-              "medium",
-              "low"
-            ]
+          "name" : {
+            "type" : "string"
           },
-          "isObservation": {
-            "type": "boolean",
-            "const": true,
-            "description": "G4 — kamado OBSERVES public assets; observation ≠ operation; not a target-list"
+          "status" : {
+            "type" : "string",
+            "enum" : [ "active", "idled", "decommissioning", "converted" ]
           },
-          "sourcing": {
-            "type": "string",
-            "enum": [
-              "representative",
-              "synthesized",
-              "verified"
-            ]
+          "throughputBpd" : {
+            "type" : "integer",
+            "description" : ":representative public-bulletin figure"
           }
         }
       }
